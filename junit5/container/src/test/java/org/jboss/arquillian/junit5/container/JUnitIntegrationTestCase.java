@@ -1,6 +1,10 @@
 /*
  * JBoss, Home of Professional Open Source
+<<<<<<< HEAD
  * Copyright 2009 Red Hat Inc. and/or its affiliates and other contributors
+=======
+ * Copyright 2021 Red Hat Inc. and/or its affiliates and other contributors
+>>>>>>> upstream/master
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -26,7 +30,11 @@ import static org.mockito.Mockito.mock;
 public class JUnitIntegrationTestCase extends JUnitTestBaseClass {
 
     @Test
+<<<<<<< HEAD
     public void should_execute_extensions() throws Exception {
+=======
+    public void shouldExecuteExtensions() throws Exception {
+>>>>>>> upstream/master
         // given
         TestRunnerAdaptor adaptor = mock(TestRunnerAdaptor.class);
         executeAllLifeCycles(adaptor);
