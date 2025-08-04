@@ -28,7 +28,6 @@ import org.jboss.arquillian.test.spi.TestResult;
  * LocalContainerMethodExecutor
  *
  * @author <a href="mailto:aslak@redhat.com">Aslak Knutsen</a>
- * @version $Revision: $
  */
 public class LocalContainerMethodExecutor implements ContainerMethodExecutor {
     @Inject
@@ -42,8 +41,8 @@ public class LocalContainerMethodExecutor implements ContainerMethodExecutor {
      */
     public TestResult invoke(TestMethodExecutor testMethodExecutor) {
       /*
-       *  TODO: when we fire a LocalExecutionEvent from a ContainerMethodExecutor, 
-       *  both the LocalTestExecutor and RemoteTestExecutor will set the same TestResult. 
+       *  TODO: when we fire a LocalExecutionEvent from a ContainerMethodExecutor,
+       *  both the LocalTestExecutor and RemoteTestExecutor will set the same TestResult.
        */
         event.fire(new LocalExecutionEvent(testMethodExecutor));
         return testResult.get();

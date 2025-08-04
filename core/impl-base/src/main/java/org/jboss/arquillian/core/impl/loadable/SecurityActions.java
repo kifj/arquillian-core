@@ -32,7 +32,6 @@ import java.util.List;
  * A set of privileged actions that are not to leak out
  * of this package
  *
- * @version $Revision: $
  */
 final class SecurityActions {
 
@@ -329,9 +328,7 @@ final class SecurityActions {
     /**
      * Single instance to get the TCCL
      */
-    private enum GetTcclAction implements PrivilegedAction<ClassLoader>
-
-    {
+    private enum GetTcclAction implements PrivilegedAction<ClassLoader> {
         INSTANCE;
 
         public ClassLoader run() {

@@ -21,6 +21,7 @@ import java.util.Map;
 import org.jboss.arquillian.container.spi.client.deployment.DeploymentDescription;
 import org.jboss.arquillian.container.spi.client.deployment.TargetDescription;
 import org.jboss.arquillian.container.spi.client.protocol.ProtocolDescription;
+import org.jboss.arquillian.container.test.spi.client.protocol.ProtocolConfiguration;
 import org.jboss.arquillian.container.test.api.Testable;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ArchivePath;
@@ -34,10 +35,11 @@ import org.jboss.shrinkwrap.api.Node;
  * With convenience methods for working / manipulating the Archives.
  *
  * @author <a href="mailto:aslak@redhat.com">Aslak Knutsen</a>
- * @version $Revision: $
  */
 public class TestDeployment {
     private DeploymentDescription deploymentDescription;
+    // The optional ProtocolConfiguration associated with the deployment
+    private ProtocolConfiguration protocolConfiguration;
 
     private Archive<?> applicationArchive;
 
@@ -128,5 +130,13 @@ public class TestDeployment {
 
     public Collection<Archive<?>> getAuxiliaryArchives() {
         return auxiliaryArchives;
+    }
+
+    public ProtocolConfiguration getProtocolConfiguration() {
+        return protocolConfiguration;
+    }
+
+    public void setProtocolConfiguration(ProtocolConfiguration protocolConfiguration) {
+        this.protocolConfiguration = protocolConfiguration;
     }
 }

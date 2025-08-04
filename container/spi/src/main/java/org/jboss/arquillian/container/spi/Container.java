@@ -10,7 +10,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -28,9 +28,8 @@ import org.jboss.arquillian.container.spi.client.protocol.ProtocolDescription;
  * ContainerT
  *
  * @author <a href="mailto:aslak@redhat.com">Aslak Knutsen</a>
- * @version $Revision: $
  */
-public interface Container {
+public interface Container<T extends ContainerConfiguration> {
 
     /**
      * @return the name
@@ -40,7 +39,7 @@ public interface Container {
     /**
      * @return the deployableContainer
      */
-    DeployableContainer<?> getDeployableContainer();
+    DeployableContainer<T> getDeployableContainer();
 
     /**
      * @return the containerConfiguration
@@ -50,7 +49,7 @@ public interface Container {
     /**
      * @return the configuration
      */
-    ContainerConfiguration createDeployableConfiguration() throws Exception;
+    T createDeployableConfiguration() throws Exception;
 
     boolean hasProtocolConfiguration(ProtocolDescription description);
 

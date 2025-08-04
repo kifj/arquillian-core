@@ -10,7 +10,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -56,7 +56,6 @@ import org.jboss.arquillian.core.api.annotation.Observes;
  * and handle them inside the same context.
  *
  * @author <a href="mailto:aslak@redhat.com">Aslak Knutsen</a>
- * @version $Revision: $
  */
 public class ContainerDeployController {
     @Inject
@@ -136,7 +135,7 @@ public class ContainerDeployController {
                 DeployableContainer<?> deployableContainer = event.getDeployableContainer();
                 Deployment deployment = event.getDeployment();
                 DeploymentDescription deploymentDescription = deployment.getDescription();
-            
+
             /*
              * TODO: should the DeploymentDescription producer some how be automatically registered ?
              * Or should we just 'know' who is the first one to create the context

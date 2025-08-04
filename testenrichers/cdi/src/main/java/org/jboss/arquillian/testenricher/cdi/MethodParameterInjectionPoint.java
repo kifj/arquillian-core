@@ -37,7 +37,6 @@ import javax.enterprise.util.AnnotationLiteral;
  *
  * @author <a href="mailto:aknutsen@redhat.com">Aslak Knutsen</a>
  * @author Pete Muir
- * @version $Revision: $
  */
 public class MethodParameterInjectionPoint<T> implements InjectionPoint {
     private Method method;
@@ -75,8 +74,8 @@ public class MethodParameterInjectionPoint<T> implements InjectionPoint {
             }
         }
       /*
-       * TODO: ARQ-240 We should not add @Default by default, this should be handled by CDI. 
-       * Due to bug in Weld 1.0.0.SP4(fixed in trunk). Remove this when 1.1.0 is out. 
+       * TODO: ARQ-240 We should not add @Default by default, this should be handled by CDI.
+       * Due to bug in Weld 1.0.0.SP4(fixed in trunk). Remove this when 1.1.0 is out.
        */
         if (qualifiers.size() == 0) {
             qualifiers.add(new DefaultLiteral());

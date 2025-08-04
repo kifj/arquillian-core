@@ -28,7 +28,6 @@ import org.junit.Test;
  * SystemPropertiesReaderTestCase
  *
  * @author <a href="mailto:aslak@redhat.com">Aslak Knutsen</a>
- * @version $Revision: $
  */
 public class PropertiesParserTestCase {
     private static final String ENGINE_PROP_DEPLOYMENTS = "arq.engine.deploymentExportPath";
@@ -470,14 +469,14 @@ public class PropertiesParserTestCase {
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldThrowExceptionIfDescriptorIsNull() {
-	new PropertiesParser().addProperties(null, System.getProperties());
+        new PropertiesParser().addProperties(null, System.getProperties());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldThrowExceptionIfPropertiesIsNull() {
-	new PropertiesParser().addProperties(desc, null);
+        new PropertiesParser().addProperties(desc, null);
     }
-    
+
     private void validate(String property, String value, ValueCallback callback) {
         validate(property, value, value, callback);
     }

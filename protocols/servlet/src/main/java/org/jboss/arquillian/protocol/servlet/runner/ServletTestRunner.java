@@ -42,7 +42,6 @@ import org.jboss.arquillian.test.spi.TestResult;
  * - serializedObject
  *
  * @author <a href="mailto:aslak@conduct.no">Aslak Knutsen</a>
- * @version $Revision: $
  */
 public class ServletTestRunner extends HttpServlet {
     public static final String PARA_METHOD_NAME = "methodName";
@@ -201,7 +200,9 @@ public class ServletTestRunner extends HttpServlet {
             try {
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
             } catch (Exception e2) {
-                throw new RuntimeException("Could not write to output", e2);
+                RuntimeException runtimeException = new RuntimeException("Could not write to output", e2);
+                runtimeException.addSuppressed(e);
+                throw runtimeException;
             }
         }
     }

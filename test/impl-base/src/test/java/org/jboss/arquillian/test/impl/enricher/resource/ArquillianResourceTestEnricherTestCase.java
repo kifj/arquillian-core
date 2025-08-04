@@ -31,16 +31,13 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.internal.matchers.VarargMatcher;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
@@ -59,7 +56,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *
  * @author <a href="mailto:aslak@redhat.com">Aslak Knutsen</a>
  * @author Vineet Reynolds
- * @version $Revision: $
  */
 @RunWith(MockitoJUnitRunner.class)
 public class ArquillianResourceTestEnricherTestCase extends AbstractTestTestBase {

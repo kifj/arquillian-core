@@ -10,15 +10,13 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package org.jboss.arquillian.junit.standalone;
 
-import java.lang.reflect.Method;
-import java.util.Collection;
 import org.jboss.arquillian.core.api.Instance;
 import org.jboss.arquillian.core.api.InstanceProducer;
 import org.jboss.arquillian.core.api.annotation.Inject;
@@ -26,15 +24,14 @@ import org.jboss.arquillian.core.api.annotation.Observes;
 import org.jboss.arquillian.core.spi.ServiceLoader;
 import org.jboss.arquillian.test.spi.TestEnricher;
 import org.jboss.arquillian.test.spi.TestResult;
-import org.jboss.arquillian.test.spi.TestResult.Status;
 import org.jboss.arquillian.test.spi.annotation.TestScoped;
 import org.jboss.arquillian.test.spi.event.suite.Test;
+import org.jboss.arquillian.test.spi.execution.ExecUtils;
 
 /**
  * LocalTestMethodExecutor
  *
  * @author <a href="mailto:aslak@redhat.com">Aslak Knutsen</a>
- * @version $Revision: $
  */
 public class LocalTestMethodExecutor {
     @Inject
@@ -47,10 +44,10 @@ public class LocalTestMethodExecutor {
     public void execute(@Observes Test event) throws Exception {
         TestResult result = TestResult.passed();
         try {
-            event.getTestMethodExecutor().invoke(
-                enrichArguments(
-                    event.getTestMethod(),
-                    serviceLoader.get().all(TestEnricher.class)));
+            Object[] args = ExecUtils.enrichArguments(
+                event.getTestMethodExecutor().getMethod(),
+                serviceLoader.get().all(TestEnricher.class));
+            event.getTestMethodExecutor().invoke(args);
         } catch (Throwable e) {
             result = TestResult.failed(e);
         } finally {
@@ -59,36 +56,4 @@ public class LocalTestMethodExecutor {
         testResult.set(result);
     }
 
-    /**
-     * Enrich the method arguments of a method call.<br/>
-     * The Object[] index will match the method parameterType[] index.
-     *
-     * @return the argument values
-     */
-    private Object[] enrichArguments(Method method, Collection<TestEnricher> enrichers) {
-        Object[] values = new Object[method.getParameterTypes().length];
-        if (method.getParameterTypes().length == 0) {
-            return values;
-        }
-        for (TestEnricher enricher : enrichers) {
-            mergeValues(values, enricher.resolve(method));
-        }
-        return values;
-    }
-
-    private void mergeValues(Object[] values, Object[] resolvedValues) {
-        if (resolvedValues == null || resolvedValues.length == 0) {
-            return;
-        }
-        if (values.length != resolvedValues.length) {
-            throw new IllegalStateException("TestEnricher resolved wrong argument count, expected " +
-                values.length + " returned " + resolvedValues.length);
-        }
-        for (int i = 0; i < resolvedValues.length; i++) {
-            Object resvoledValue = resolvedValues[i];
-            if (resvoledValue != null && values[i] == null) {
-                values[i] = resvoledValue;
-            }
-        }
-    }
 }

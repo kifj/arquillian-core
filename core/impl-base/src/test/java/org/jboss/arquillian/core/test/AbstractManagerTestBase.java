@@ -42,7 +42,6 @@ import org.junit.Before;
  * AbstractManagerTestBase
  *
  * @author <a href="mailto:aslak@redhat.com">Aslak Knutsen</a>
- * @version $Revision: $
  */
 public abstract class AbstractManagerTestBase {
     private static ManagerImpl manager;
@@ -297,7 +296,7 @@ public abstract class AbstractManagerTestBase {
         private Map<Class<? extends Context>, Boolean> activeContexts;
         private String threadName;
 
-        public EventRecording() {
+        EventRecording() {
             threadName = Thread.currentThread().getName();
             activeContexts = new HashMap<Class<? extends Context>, Boolean>();
         }

@@ -37,7 +37,6 @@ import org.junit.runner.notification.RunListener;
  *
  * @author <a href="mailto:aslak@conduct.no">Aslak Knutsen</a>
  * @author thomas.diesler@jboss.com
- * @version $Revision: $
  */
 public class JUnitTestRunner implements TestRunner {
     /**
@@ -92,7 +91,6 @@ public class JUnitTestRunner implements TestRunner {
             // AssumptionViolatedException might not be Serializable. Recreate with only String message.
             exception = new AssumptionViolatedException(failure.getException().getMessage());
             exception.setStackTrace(failure.getException().getStackTrace());
-            ;
         }
 
         @Override

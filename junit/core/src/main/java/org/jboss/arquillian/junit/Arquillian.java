@@ -43,7 +43,6 @@ import org.junit.runners.model.Statement;
  * Main Arquillian JUnit runner
  *
  * @author <a href="mailto:aslak@conduct.no">Aslak Knutsen</a>
- * @version $Revision: $
  */
 public class Arquillian extends BlockJUnit4ClassRunner {
     private TestRunnerAdaptor adaptor;
@@ -141,11 +140,11 @@ public class Arquillian extends BlockJUnit4ClassRunner {
 
     /*
     * Override BeforeClass/AfterClass and Before/After handling.
-    * 
+    *
     * Let super create the Before/After chain against a EmptyStatement so our newly created Statement
-    * only contains the method that are of interest to us(@Before..etc). 
+    * only contains the method that are of interest to us(@Before..etc).
     * They can then optionally be executed if we get expected callback.
-    * 
+    *
     */
 
     @Override
@@ -335,7 +334,6 @@ public class Arquillian extends BlockJUnit4ClassRunner {
      * fail, a {@link MultipleFailureException} will be thrown.
      *
      * @author <a href="mailto:aslak@redhat.com">Aslak Knutsen</a>
-     * @version $Revision: $
      */
     private void multiExecute(Statement... statements) throws Throwable {
         List<Throwable> exceptions = new ArrayList<Throwable>();
@@ -364,7 +362,7 @@ public class Arquillian extends BlockJUnit4ClassRunner {
     private static class StatementLifecycleExecutor implements LifecycleMethodExecutor {
         private Statement statement;
 
-        public StatementLifecycleExecutor(Statement statement) {
+        StatementLifecycleExecutor(Statement statement) {
             this.statement = statement;
         }
 

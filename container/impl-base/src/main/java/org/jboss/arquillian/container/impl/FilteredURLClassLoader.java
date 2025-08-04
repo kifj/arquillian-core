@@ -23,7 +23,6 @@ import java.net.URLClassLoader;
  * FilteredURLClassLoader
  *
  * @author <a href="mailto:aslak@redhat.com">Aslak Knutsen</a>
- * @version $Revision: $
  */
 public class FilteredURLClassLoader extends URLClassLoader {
 
@@ -43,8 +42,7 @@ public class FilteredURLClassLoader extends URLClassLoader {
                     c = super.findClass(name);
                 }
             }
-            if (c != null) // class found locally
-            {
+            if (c != null) { // class found locally
                 return c;
             }
         }

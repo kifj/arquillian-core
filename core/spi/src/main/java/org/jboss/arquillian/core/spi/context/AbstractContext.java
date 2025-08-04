@@ -20,20 +20,21 @@ import java.util.Map;
 import java.util.Stack;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
+
+import org.jboss.arquillian.core.spi.ArquillianThreadLocal;
 import org.jboss.arquillian.core.spi.Validate;
 
 /**
  * AbstractContext
  *
  * @author <a href="mailto:aslak@redhat.com">Aslak Knutsen</a>
- * @version $Revision: $
  */
 public abstract class AbstractContext<T> implements Context, IdBoundContext<T> {
     private static Logger log = Logger.getLogger("Context");
 
     private ConcurrentHashMap<T, ObjectStore> stores;
 
-    private ThreadLocal<Stack<StoreHolder<T>>> activeStore = new ThreadLocal<Stack<StoreHolder<T>>>() {
+    private ArquillianThreadLocal<Stack<StoreHolder<T>>> activeStore = new ArquillianThreadLocal<Stack<StoreHolder<T>>>() {
 
         @Override
         protected Stack<StoreHolder<T>> initialValue() {
@@ -105,6 +106,8 @@ public abstract class AbstractContext<T> implements Context, IdBoundContext<T> {
                 deactivateAll();
             }
             activeStore.remove();
+            //Force cleanup:
+            activeStore.clear();
             for (Map.Entry<T, ObjectStore> entry : stores.entrySet()) {
                 entry.getValue().clear();
             }
@@ -132,7 +135,7 @@ public abstract class AbstractContext<T> implements Context, IdBoundContext<T> {
         private X id;
         private ObjectStore store;
 
-        public StoreHolder(X id, ObjectStore store) {
+        StoreHolder(X id, ObjectStore store) {
             this.id = id;
             this.store = store;
         }

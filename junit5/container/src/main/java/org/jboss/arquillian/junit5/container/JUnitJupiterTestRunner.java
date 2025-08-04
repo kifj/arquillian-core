@@ -24,6 +24,9 @@ import org.junit.platform.launcher.core.LauncherDiscoveryRequestBuilder;
 import org.junit.platform.launcher.core.LauncherFactory;
 import org.opentest4j.TestAbortedException;
 
+/**
+ * An Arquillian TestRunner implementation for JUnit Jupiter.
+ */
 public class JUnitJupiterTestRunner implements TestRunner {
 
     @Override
@@ -67,7 +70,10 @@ public class JUnitJupiterTestRunner implements TestRunner {
     }
 
     private static class ArquillianTestMethodExecutionListener implements TestExecutionListener {
+        // Map of test identifier to exception
         private final Map<String, Throwable> exceptions = new HashMap<>();
+        // The test execution failure or a general error if the test result has no exception but is not successful
+        private Throwable fatalError;
 
         public void executionSkipped(TestIdentifier testIdentifier, String reason) {
             exceptions.put(testIdentifier.getUniqueId(), new TestAbortedException(reason));
@@ -77,6 +83,9 @@ public class JUnitJupiterTestRunner implements TestRunner {
             TestExecutionResult.Status status = testExecutionResult.getStatus();
 
             if (!testIdentifier.isTest()) {
+                if (status != TestExecutionResult.Status.SUCCESSFUL) {
+                    fatalError = testExecutionResult.getThrowable().orElseGet(() -> new Exception("Failed"));
+                }
                 return;
             }
             switch (status) {
@@ -98,6 +107,9 @@ public class JUnitJupiterTestRunner implements TestRunner {
         }
 
         private TestResult getTestResult() {
+            if (fatalError != null) {
+                return TestResult.failed(fatalError);
+            }
             return exceptions.isEmpty() ? TestResult.passed() : TestResult.failed(new IdentifiedTestException(exceptions));
         }
     }

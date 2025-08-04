@@ -55,7 +55,6 @@ import org.jboss.arquillian.config.descriptor.api.ProtocolDef;
  *     arq.container.[qualifier].configuration.[property_name]=[ORIGINAL] new-values
  *
  * @author <a href="mailto:aslak@redhat.com">Aslak Knutsen</a>
- * @version $Revision: $
  */
 class PropertiesParser {
     private static String ARQ_PROPERTY = "arq\\..*";
@@ -229,7 +228,7 @@ class PropertiesParser {
     }
 
     private class Extension extends Handler {
-        public Extension(String expression) {
+        Extension(String expression) {
             super(expression);
         }
 
@@ -249,7 +248,7 @@ class PropertiesParser {
     }
 
     private class Container extends Handler {
-        public Container(String expression) {
+        Container(String expression) {
             super(expression);
         }
 

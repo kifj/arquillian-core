@@ -35,7 +35,6 @@ import org.jboss.arquillian.test.spi.TestEnricher;
  * Enricher that provide EJB class and setter method injection.
  *
  * @author <a href="mailto:aknutsen@redhat.com">Aslak Knutsen</a>
- * @version $Revision: $
  */
 public class EJBInjectionEnricher implements TestEnricher {
     private static final String ANNOTATION_NAME = "javax.ejb.EJB";
@@ -103,12 +102,10 @@ public class EJBInjectionEnricher implements TestEnricher {
                 ejbAnnotation);
 
             for (Field field : annotatedFields) {
-                if (field.get(testCase) == null) // only try to lookup fields that are not already set
-                {
+                if (field.get(testCase) == null) { // only try to lookup fields that are not already set
                     EJB fieldAnnotation = (EJB) field.getAnnotation(ejbAnnotation);
                     try {
                         String mappedName = fieldAnnotation.mappedName();
-                        ;
                         String beanName = fieldAnnotation.beanName();
                         String lookup = attemptToGet31LookupField(fieldAnnotation);
 

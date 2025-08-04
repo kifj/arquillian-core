@@ -31,7 +31,6 @@ import java.util.Properties;
  * @author <a href="claudio.vesco@previnet.it">Claudio Vesco</a>
  * @author <a href="mailto:adrian@jboss.com">Adrian Brock</a>
  * @author <a href="mailto:dimitris@jboss.org">Dimitris Andreadis</a>
- * @version <tt>$Revision: 2898 $</tt>
  */
 public final class StringPropertyReplacer {
 
@@ -153,8 +152,7 @@ public final class StringPropertyReplacer {
                 // No content
                 if (start + 2 == i) {
                     buffer.append("${}"); // REVIEW: Correct?
-                } else // Collect the system property
-                {
+                } else { // Collect the system property
                     String value;
 
                     String key = string.substring(start + 2, i);

@@ -51,7 +51,6 @@ import static org.mockito.Mockito.doAnswer;
  * JUnitTestBaseClass
  *
  * @author <a href="mailto:aslak@redhat.com">Aslak Knutsen</a>
- * @version $Revision: $
  */
 public class JUnitTestBaseClass {
     /*
@@ -127,6 +126,24 @@ public class JUnitTestBaseClass {
             if (listener != null) {
                 launcher.registerTestExecutionListeners(listener);
             }
+            launcher.execute(request);
+            return summaryListener.getSummary();
+        } finally {
+            setAdaptor(null);
+        }
+    }
+
+    protected TestExecutionSummary runSuite(TestRunnerAdaptor adaptor, Class<?> suiteClass) throws Exception {
+        try {
+            setAdaptor(adaptor);
+
+            LauncherDiscoveryRequestBuilder builder = LauncherDiscoveryRequestBuilder.request()
+                .selectors(DiscoverySelectors.selectClass(suiteClass));
+            LauncherDiscoveryRequest request = builder.build();
+            SummaryGeneratingListener summaryListener = new SummaryGeneratingListener();
+
+            Launcher launcher = LauncherFactory.create();
+            launcher.registerTestExecutionListeners(summaryListener);
             launcher.execute(request);
             return summaryListener.getSummary();
         } finally {

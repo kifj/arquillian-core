@@ -10,7 +10,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -22,20 +22,19 @@ import org.jboss.arquillian.core.spi.context.Context;
 /**
  * LoadableExtension.
  * <p>
- * Loadable extensions are loaded on the local side of Arquillan. For extensions, components, observers etc to run on
+ * Loadable extensions are loaded on the local side of Arquillian. For extensions, components, observers etc to run on
  * the remote side, use {@code RemoteLoadableExtension} instead, and provide it via an
  * {@code AuxilliaryArchiveAppender}.
  *
  * @author <a href="mailto:aslak@redhat.com">Aslak Knutsen</a>
- * @version $Revision: $
  */
 public interface LoadableExtension {
     /**
      * Implement to register any extensions.
      */
-    public void register(ExtensionBuilder builder);
+    void register(ExtensionBuilder builder);
 
-    public interface ExtensionBuilder {
+    interface ExtensionBuilder {
         /**
          * Register a service implementation.
          * <p>
@@ -58,6 +57,9 @@ public interface LoadableExtension {
          * Register an observer for events. This observer will be injected according to any
          * {@link org.jboss.arquillian.core.api.annotation.Inject} annotated
          * {@link org.jboss.arquillian.core.api.Instance} fields.
+         * Note: the handler does not have to have any use of {@link org.jboss.arquillian.core.api.annotation.Observer}
+         * and this can be used to simply register a class that has needs to be instantiated and injected.
+         * @param handler A class with observer methods and/or Instance fields
          */
         ExtensionBuilder observer(Class<?> handler);
 
@@ -67,7 +69,7 @@ public interface LoadableExtension {
         ExtensionBuilder context(Class<? extends Context> context);
     }
 
-    public static class Validate {
+    class Validate {
         public static boolean classExists(String className) {
             try {
                 Class.forName(className);

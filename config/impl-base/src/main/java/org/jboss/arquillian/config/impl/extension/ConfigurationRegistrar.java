@@ -17,7 +17,6 @@
 package org.jboss.arquillian.config.impl.extension;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -40,7 +39,6 @@ import java.util.Properties;
  * Configurator
  *
  * @author <a href="mailto:aslak@redhat.com">Aslak Knutsen</a>
- * @version $Revision: $
  */
 public class ConfigurationRegistrar {
     public static final String ARQUILLIAN_XML_PROPERTY = "arquillian.xml";

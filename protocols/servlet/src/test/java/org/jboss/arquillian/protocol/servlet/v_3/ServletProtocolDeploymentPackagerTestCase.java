@@ -43,7 +43,6 @@ import org.junit.Test;
  * ServletProtocolDeploymentPackagerTestCase
  *
  * @author <a href="mailto:aslak@redhat.com">Aslak Knutsen</a>
- * @version $Revision: $
  */
 public class ServletProtocolDeploymentPackagerTestCase {
     @Test
@@ -300,7 +299,7 @@ public class ServletProtocolDeploymentPackagerTestCase {
     private static class DummyProcessor implements ProtocolArchiveProcessor {
         public static boolean wasCalled = false;
 
-        public DummyProcessor() {
+        DummyProcessor() {
             wasCalled = false;
         }
 

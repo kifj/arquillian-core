@@ -45,7 +45,6 @@ import org.testng.annotations.Listeners;
  * Arquillian
  *
  * @author <a href="mailto:aslak@conduct.no">Aslak Knutsen</a>
- * @version $Revision: $
  */
 @Listeners(Arquillian.UpdateResultListener.class)
 public abstract class Arquillian implements IHookable {
@@ -261,8 +260,7 @@ public abstract class Arquillian implements IHookable {
         return values;
     }
 
-    private static enum Cycle
-    {
+    private enum Cycle {
         BEFORE_SUITE, BEFORE_CLASS, BEFORE, TEST, AFTER, AFTER_CLASS, AFTER_SUITE
     }
 
